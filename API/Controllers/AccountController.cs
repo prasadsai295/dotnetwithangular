@@ -50,12 +50,17 @@ namespace API.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto){
             var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName.ToLower() == loginDto.UserName.ToLower());
-            if(user == null) return Unauthorized("invalid username or password.");
+            if(user == null) 
+            {
+                return Unauthorized("invalid username or password.");
+            }
             using var hmac = new HMACSHA512(user.PasswordSalt);
             var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
            for (int i = 0; i < computedHash.Length; i++)
            {
-              if(computedHash[i] != user.PasswordHash[i]) return Unauthorized(value: "invalid username or password.");
+              if(computedHash[i] != user.PasswordHash[i]){ 
+                return Unauthorized(value: "invalid username or password.");
+              }
            }
 
            var userDto = new UserDto{

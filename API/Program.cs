@@ -3,6 +3,7 @@ using API.Data;
 using API.Extensions;
 using API.Filters;
 using API.Interfaces;
+using API.Middlewares;
 using API.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -24,7 +25,7 @@ builder.Services.AddTransient<ITokenService, TokenService>();
 
 var app = builder.Build();
 
-
+ app.UsePathBase(new PathString("/myapp"));
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -33,7 +34,7 @@ if (app.Environment.IsDevelopment())
 
 // app.UseHttpsRedirection();
 
-
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors("MyPolicy");
 app.UseAuthentication();
 app.UseAuthorization();

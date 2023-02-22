@@ -75,7 +75,6 @@ namespace API.Extensions
 
         public static WebApplication UseSwaggerExtensionServices(this WebApplication app){
             var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
-             app.UsePathBase(new PathString("/myapp"));
 
             // SWAGGER
             // Enable middleware to serve generated Swagger as a JSON endpoint but customize the pathbase.
