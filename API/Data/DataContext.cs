@@ -11,6 +11,8 @@ namespace API.Data
     {
         public DataContext(DbContextOptions options) : base(options)
         {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
         }
         public DbSet<AppUser> Users { get; set; }
     }

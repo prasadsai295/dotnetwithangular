@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using API.Data;
 using API.Filters;
+using API.Interfaces;
+using API.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -58,7 +60,11 @@ namespace API.Extensions
                     cors.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200", "http://localhost:4200");
                 });
             });
+
+            services.AddTransient<ITokenService, TokenService>();
+            services.AddTransient<IUserRepository, UserRepository>();
             
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             return services;
         }
 

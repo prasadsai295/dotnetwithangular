@@ -34,19 +34,19 @@ namespace API.Filters
 
                 parameter.Required |= description.IsRequired;
             }
-			operation.Parameters.Add(new OpenApiParameter
-			{
-				Name = "programId",
-				In = ParameterLocation.Header,
-                Description = "This header programId parameter is exclusively to validate the User have Access Permissions",
-                Required = false,
-				Example = new OpenApiString("0"),
-                Schema = new OpenApiSchema
-                {
-                    Type = "integer",
-                    Format = "int64"
-                }
-            });
+			// operation.Parameters.Add(new OpenApiParameter
+			// {
+			// 	Name = "programId",
+			// 	In = ParameterLocation.Header,
+            //     Description = "This header programId parameter is exclusively to validate the User have Access Permissions",
+            //     Required = false,
+			// 	Example = new OpenApiString("0"),
+            //     Schema = new OpenApiSchema
+            //     {
+            //         Type = "integer",
+            //         Format = "int64"
+            //     }
+            // });
 		}
     }
 }
